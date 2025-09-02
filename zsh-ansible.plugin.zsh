@@ -18,9 +18,9 @@ _zsh_pyenv_package() {
 }
 
 _zsh_pyenv_apply() {
-    eval "$(pyenv init -)"
-    source ${PYENV_ROOT}/completions/pyenv.zsh
-  fi
+  eval "$(pyenv init -)"
+
+  source ${PYENV_ROOT}/completions/pyenv.zsh
 }
 
 # Вызов установки в фоне
