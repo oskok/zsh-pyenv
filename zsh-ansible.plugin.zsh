@@ -20,26 +20,23 @@ _zsh_pyenv_package() {
   )
 
   ZSH_CURRENT_PATH=$(pwd)
-  setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
-
 
   for k in "${(@k)ZSH_PYENV_DEFAULT}"; do
     if [[ ! -d $ZSH_PYENV_DEFAULT[$k] ]]; then
-      git clone $k $ZSH_PYENV_DEFAULT[$k] > /dev/null 2>&1 &
+      git clone $k $ZSH_PYENV_DEFAULT[$k]
     else
-      cd $ZSH_PYENV_DEFAULT[$k] && git pull > /dev/null 2>&1 &
+      cd $ZSH_PYENV_DEFAULT[$k] && git pull
     fi
   done
 
   for k in "${(@k)ZSH_PYENV_PLUGINS}"; do
     if [[ ! -d $ZSH_PYENV_PLUGINS[$k] ]]; then
-      git clone $k $ZSH_PYENV_PLUGINS[$k] > /dev/null 2>&1 &
+      git clone $k $ZSH_PYENV_PLUGINS[$k]
     else
-      cd $ZSH_PYENV_PLUGINS[$k] && git pull > /dev/null 2>&1 &
+      cd $ZSH_PYENV_PLUGINS[$k] && git pull
     fi
   done
 
-  disown &>/dev/null
   cd ${ZSH_CURRENT_PATH}
 
   export PATH="${PATH}:${PYENV_ROOT}/bin"
@@ -55,7 +52,9 @@ _zsh_pyenv_apply() {
 
 # Вызов установки в фоне
 if type git >/dev/null; then
-  _zsh_pyenv_package
+  setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
+  _zsh_pyenv_package > /dev/null 2>&1 &
+  disown &>/dev/null
 fi
 
 if type pyenv >/dev/null; then
