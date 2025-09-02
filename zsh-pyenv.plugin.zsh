@@ -5,7 +5,7 @@
 _zsh_pyenv_package() {
   export PYENV_ROOT="${HOME}/.pyenv"
 
-  typeset -r PYENV_VERSION=(
+  typeset -r ZSH_PYENV_VERSION=(
     '3.10'
     '3.11'
     '3.12'
@@ -56,10 +56,13 @@ _zsh_pyenv_package() {
   fi
 
   if type pyenv >/dev/null; then
-    for version in "${PYENV_VERSION[@]}"; do
+    for version in "${ZSH_PYENV_VERSION[@]}"; do
       pyenv install ${version} --skip-existing
+      if type terminal-notifier; then
+        terminal-notifier -title PYENV -message Python ${version} was installed
+      fi
     done
-    pyenv global $PYENV_VERSION
+    pyenv global $ZSH_PYENV_VERSION
   fi
   rehash
 }
