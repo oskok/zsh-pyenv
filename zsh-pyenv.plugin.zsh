@@ -18,11 +18,14 @@ _zsh_pyenv_package() {
   export PATH="${PATH}:${PYENV_ROOT}/bin"
   export PATH="${PATH}:${PYENV_ROOT}/shims"
   rehash
+  echo
 
   eval "$(pyenv init - zsh)"
   source ${PYENV_ROOT}/completions/pyenv.zsh
 
 }
+
+# -----------------------------------------------------------------------------
 
 _zsh_pyenv_install() {
 
@@ -41,8 +44,26 @@ _zsh_pyenv_install() {
   fi
 
   rehash
+  echo
+
 }
 
+_zsh_pyenv_update() {
+
+  if type pyenv >/dev/null; then
+    pyenv update &
+  fi
+
+}
+
+# -----------------------------------------------------------------------------
+
+# Вызов установки в фоне
+if type git >/dev/null; then
+  _zsh_pyenv_package # > /dev/null 2>&1 &
+  _zsh_pyenv_install
+  _zsh_pyenv_update
+fi
 
 
   # typeset -A ZSH_PYENV_DEFAULT
@@ -95,10 +116,3 @@ _zsh_pyenv_install() {
   #   pyenv global $ZSH_PYENV_VERSION
   # fi
   # rehash
-
-
-# Вызов установки в фоне
-if type git >/dev/null; then
-  _zsh_pyenv_package # > /dev/null 2>&1 &
-  _zsh_pyenv_install
-fi
