@@ -19,27 +19,28 @@ _zsh_pyenv_package() {
     "https://github.com/pyenv/pyenv-which-ext.git"  "${PYENV_ROOT}/plugins/pyenv-which-ext"
   )
 
-  setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
   ZSH_CURRENT_PATH=$(pwd)
+  setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
+
 
   for k in "${(@k)ZSH_PYENV_DEFAULT}"; do
     if [[ ! -d $ZSH_PYENV_DEFAULT[$k] ]]; then
-      git clone $k $ZSH_PYENV_DEFAULT[$k]
+      git clone $k $ZSH_PYENV_DEFAULT[$k] > /dev/null 2>&1 &
     else
-      cd $ZSH_PYENV_DEFAULT[$k] && git pull
+      cd $ZSH_PYENV_DEFAULT[$k] && git pull > /dev/null 2>&1 &
     fi
   done
 
   for k in "${(@k)ZSH_PYENV_PLUGINS}"; do
     if [[ ! -d $ZSH_PYENV_PLUGINS[$k] ]]; then
-      git clone $k $ZSH_PYENV_PLUGINS[$k]
+      git clone $k $ZSH_PYENV_PLUGINS[$k] > /dev/null 2>&1 &
     else
-      cd $ZSH_PYENV_PLUGINS[$k] && git pull
+      cd $ZSH_PYENV_PLUGINS[$k] && git pull > /dev/null 2>&1 &
     fi
   done
 
-  cd ${ZSH_CURRENT_PATH}
   disown &>/dev/null
+  cd ${ZSH_CURRENT_PATH}
 
   export PATH="${PATH}:${PYENV_ROOT}/bin"
   export PATH="${PATH}:${PYENV_ROOT}/shims"
