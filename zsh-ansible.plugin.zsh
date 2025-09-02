@@ -11,7 +11,7 @@ _zsh_pyenv_package() {
   )
 
   typeset -A ZSH_PYENV_PLUGINS
-  ZSH_PYENV_BIN=(
+  ZSH_PYENV_PLUGINS=(
     "https://github.com/pyenv/pyenv.git"            "${PYENV_ROOT}"
     "https://github.com/pyenv/pyenv-doctor.git"     "${PYENV_ROOT}/plugins/pyenv-doctor"
     "https://github.com/pyenv/pyenv-installer.git"  "${PYENV_ROOT}/plugins/pyenv-installer"
@@ -20,10 +20,9 @@ _zsh_pyenv_package() {
     "https://github.com/pyenv/pyenv-which-ext.git"  "${PYENV_ROOT}/plugins/pyenv-which-ext"
   )
 
-
-for k in "${(@k)ZSH_PYENV_BIN}"; do
-  git clone $k $ZSH_PYENV_BIN[$k]
-done
+  for k in "${(@k)ZSH_PYENV_BIN}"; do
+    git clone $k $ZSH_PYENV_BIN[$k]
+  done
 
 
 
