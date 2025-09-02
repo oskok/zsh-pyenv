@@ -25,7 +25,7 @@ _zsh_pyenv_package() {
     if [[ ! -d $ZSH_PYENV_DEFAULT[$k] ]]; then
       git clone $k $ZSH_PYENV_DEFAULT[$k]
     else
-      cd $ZSH_PYENV_DEFAULT[$k] && git pull > /dev/null 2>&1 &
+      cd $ZSH_PYENV_DEFAULT[$k] && git pull
     fi
   done
 
@@ -33,6 +33,7 @@ _zsh_pyenv_package() {
     if [[ ! -d $ZSH_PYENV_PLUGINS[$k] ]]; then
       git clone $k $ZSH_PYENV_PLUGINS[$k]
     else
+      cd $ZSH_PYENV_PLUGINS[$k] && git pull
     fi
   done
 
