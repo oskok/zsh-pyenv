@@ -27,7 +27,10 @@ _zsh_pyenv_package() {
   done
 
   for k in "${(@k)ZSH_PYENV_PLUGINS}"; do
-    git clone $k $ZSH_PYENV_PLUGINS[$k]
+    if [[ ! -d $ZSH_PYENV_PLUGINS[$k] ]]; then
+      git clone $k $ZSH_PYENV_PLUGINS[$k]
+    else
+    fi
   done
 
   export PATH="${PATH}:${PYENV_ROOT}/bin"
