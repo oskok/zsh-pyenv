@@ -24,6 +24,10 @@ _zsh_pyenv_package() {
     git clone $k $ZSH_PYENV_BIN[$k]
   done
 
+  for k in "${(@k)ZSH_PYENV_PLUGINS}"; do
+    git clone $k $ZSH_PYENV_PLUGINS[$k]
+  done
+
 
 
 
