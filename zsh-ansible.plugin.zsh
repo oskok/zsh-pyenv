@@ -20,7 +20,7 @@ for k in "${(@k)ZSH_PYENV_SOURCES}"; do
   local ZSH_PYENV_NAME=$(echo ${ZSH_PYENV_URL##*/} | cut -d. -f1)
   local ZSH_PYENV_PATH=$ZSH_PYENV_SOURCES[$k]
 
-  git clone ${ZSH_PYENV_URL} ${PYENV_ROOT}/${ZSH_PYENV_NAME}/
+  git clone ${ZSH_PYENV_URL} ${ZSH_PYENV_PATH}/
 done
 
 
