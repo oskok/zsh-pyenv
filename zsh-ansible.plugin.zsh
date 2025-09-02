@@ -7,7 +7,7 @@ _zsh_pyenv_package() {
 
   typeset -A ZSH_PYENV_SOURCES
   ZSH_PYENV_SOURCES=(
-    "https://github.com/pyenv/pyenv.git"            "${PYENV_ROOT}/"
+    "https://github.com/pyenv/pyenv.git"            "${PYENV_ROOT}"
     "https://github.com/pyenv/pyenv-doctor.git"     "${PYENV_ROOT}/plugins/pyenv-doctor"
     "https://github.com/pyenv/pyenv-installer.git"  "${PYENV_ROOT}/plugins/pyenv-installer"
     "https://github.com/pyenv/pyenv-update.git"     "${PYENV_ROOT}/plugins/pyenv-update"
