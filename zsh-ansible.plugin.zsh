@@ -19,10 +19,13 @@ _zsh_pyenv_package() {
     "https://github.com/pyenv/pyenv-which-ext.git"  "${PYENV_ROOT}/plugins/pyenv-which-ext"
   )
 
+  ZSH_CURRENT_PATH=$(pwd)
+
   for k in "${(@k)ZSH_PYENV_DEFAULT}"; do
     if [[ ! -d $ZSH_PYENV_DEFAULT[$k] ]]; then
       git clone $k $ZSH_PYENV_DEFAULT[$k]
     else
+      cd $ZSH_PYENV_DEFAULT[$k] && git pull > /dev/null 2>&1 &
     fi
   done
 
@@ -32,6 +35,8 @@ _zsh_pyenv_package() {
     else
     fi
   done
+
+  cd ${ZSH_CURRENT_PATH}
 
   export PATH="${PATH}:${PYENV_ROOT}/bin"
   export PATH="${PATH}:${PYENV_ROOT}/shims"
