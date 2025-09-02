@@ -19,6 +19,7 @@ _zsh_pyenv_package() {
     "https://github.com/pyenv/pyenv-which-ext.git"  "${PYENV_ROOT}/plugins/pyenv-which-ext"
   )
 
+  setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
   ZSH_CURRENT_PATH=$(pwd)
 
   for k in "${(@k)ZSH_PYENV_DEFAULT}"; do
@@ -38,6 +39,7 @@ _zsh_pyenv_package() {
   done
 
   cd ${ZSH_CURRENT_PATH}
+  disown &>/dev/null
 
   export PATH="${PATH}:${PYENV_ROOT}/bin"
   export PATH="${PATH}:${PYENV_ROOT}/shims"
