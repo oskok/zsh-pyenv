@@ -42,12 +42,11 @@ _zsh_pyenv_package() {
   export PATH="${PATH}:${PYENV_ROOT}/bin"
   export PATH="${PATH}:${PYENV_ROOT}/shims"
   rehash
-}
 
-_zsh_pyenv_apply() {
-  eval "$(pyenv init - zsh)"
-
-  source ${PYENV_ROOT}/completions/pyenv.zsh
+  if type pyenv >/dev/null; then
+    eval "$(pyenv init - zsh)"
+    source ${PYENV_ROOT}/completions/pyenv.zsh
+  fi
 }
 
 # Вызов установки в фоне
@@ -55,8 +54,4 @@ if type git >/dev/null; then
   setopt LOCAL_OPTIONS NO_NOTIFY NO_MONITOR
   _zsh_pyenv_package > /dev/null 2>&1 &
   disown &>/dev/null
-fi
-
-if type pyenv >/dev/null; then
-  _zsh_pyenv_apply
 fi
