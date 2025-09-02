@@ -20,7 +20,10 @@ _zsh_pyenv_package() {
   )
 
   for k in "${(@k)ZSH_PYENV_DEFAULT}"; do
-    git clone $k $ZSH_PYENV_DEFAULT[$k]
+    if [[ ! -d $ZSH_PYENV_DEFAULT[$k] ]]; then
+      git clone $k $ZSH_PYENV_DEFAULT[$k]
+    else
+    fi
   done
 
   for k in "${(@k)ZSH_PYENV_PLUGINS}"; do
