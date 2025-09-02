@@ -5,8 +5,13 @@
 _zsh_pyenv_package() {
   export PYENV_ROOT="${HOME}/.pyenv"
 
-  typeset -A ZSH_PYENV_SOURCES
-  ZSH_PYENV_SOURCES=(
+  typeset -A ZSH_PYENV_BIN
+  ZSH_PYENV_BIN=(
+    "https://github.com/pyenv/pyenv.git"            "${PYENV_ROOT}"
+  )
+
+  typeset -A ZSH_PYENV_PLUGINS
+  ZSH_PYENV_BIN=(
     "https://github.com/pyenv/pyenv.git"            "${PYENV_ROOT}"
     "https://github.com/pyenv/pyenv-doctor.git"     "${PYENV_ROOT}/plugins/pyenv-doctor"
     "https://github.com/pyenv/pyenv-installer.git"  "${PYENV_ROOT}/plugins/pyenv-installer"
@@ -15,12 +20,9 @@ _zsh_pyenv_package() {
     "https://github.com/pyenv/pyenv-which-ext.git"  "${PYENV_ROOT}/plugins/pyenv-which-ext"
   )
 
-for k in "${(@k)ZSH_PYENV_SOURCES}"; do
-  # local ZSH_PYENV_URL=$k
-  # local ZSH_PYENV_NAME=$(echo ${ZSH_PYENV_URL##*/} | cut -d. -f1)
-  # local ZSH_PYENV_PATH=$ZSH_PYENV_SOURCES[$k]
 
-  git clone $k $ZSH_PYENV_SOURCES[$k]
+for k in "${(@k)ZSH_PYENV_BIN}"; do
+  git clone $k $ZSH_PYENV_BIN[$k]
 done
 
 
