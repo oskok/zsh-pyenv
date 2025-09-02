@@ -20,7 +20,9 @@ _zsh_pyenv_package() {
 }
 
 _zsh_pyenv_apply() {
-  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init - --no-rehash zsh)"
+  eval "$(pyenv virtualenv-init - zsh)"
 
   source ${PYENV_ROOT}/completions/pyenv.zsh
 }
