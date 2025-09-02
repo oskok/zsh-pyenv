@@ -13,12 +13,12 @@ _zsh_pyenv_package() {
     git clone https://github.com/pyenv/pyenv-update.git       "${PYENV_ROOT}/plugins/pyenv-update"
     git clone https://github.com/pyenv/pyenv-virtualenv.git   "${PYENV_ROOT}/plugins/pyenv-virtualenv"
     git clone https://github.com/pyenv/pyenv-which-ext.git    "${PYENV_ROOT}/plugins/pyenv-which-ext"
+    echo
   fi
 
   export PATH="${PATH}:${PYENV_ROOT}/bin"
   export PATH="${PATH}:${PYENV_ROOT}/shims"
   rehash
-  echo
 
   eval "$(pyenv init - zsh)"
   source ${PYENV_ROOT}/completions/pyenv.zsh
@@ -45,7 +45,6 @@ _zsh_pyenv_install() {
   fi
 
   rehash
-  echo
 
 }
 
@@ -54,7 +53,7 @@ _zsh_pyenv_install() {
 _zsh_pyenv_update() {
 
   if type pyenv >/dev/null; then
-    pyenv update &
+    pyenv update
   fi
 
 }
