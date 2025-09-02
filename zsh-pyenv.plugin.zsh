@@ -58,9 +58,6 @@ _zsh_pyenv_package() {
   if type pyenv >/dev/null; then
     for version in "${ZSH_PYENV_VERSION[@]}"; do
       pyenv install ${version} --skip-existing
-      if type terminal-notifier; then
-        terminal-notifier -title PYENV -message Python ${version} was installed
-      fi
     done
     pyenv global $ZSH_PYENV_VERSION
   fi
