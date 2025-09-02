@@ -5,6 +5,13 @@
 _zsh_pyenv_package() {
   export PYENV_ROOT="${HOME}/.pyenv"
 
+  typeset -r PYENV_VERSION=(
+    '3.10'
+    '3.11'
+    '3.12'
+    '3.13'
+  )
+
   typeset -A ZSH_PYENV_DEFAULT
   ZSH_PYENV_DEFAULT=(
     "https://github.com/pyenv/pyenv.git"            "${PYENV_ROOT}"
@@ -47,6 +54,14 @@ _zsh_pyenv_package() {
     eval "$(pyenv init - zsh)"
     source ${PYENV_ROOT}/completions/pyenv.zsh
   fi
+
+  if type pyenv >/dev/null; then
+    for version in "${PYENV_VERSION[@]}"; do
+      pyenv install ${version} --skip-existing
+    done
+    pyenv global $PYENV_VERSION
+  fi
+  rehash
 }
 
 # Вызов установки в фоне
