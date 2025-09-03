@@ -51,7 +51,7 @@ _zsh_pyenv_install() {
 _zsh_pyenv_update() {
 
   if type pyenv >/dev/null; then
-    pyenv update
+    pyenv update > /dev/null 2>&1 &
   fi
 
 }
@@ -60,7 +60,7 @@ _zsh_pyenv_update() {
 
 # Вызов установки в фоне
 if type git >/dev/null; then
-  _zsh_pyenv_package # > /dev/null 2>&1 &
+  _zsh_pyenv_package
   _zsh_pyenv_install
-  _zsh_pyenv_update &
+  _zsh_pyenv_update
 fi
