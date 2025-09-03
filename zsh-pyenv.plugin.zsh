@@ -7,6 +7,7 @@ _zsh_pyenv_package() {
   export PYENV_ROOT="${HOME}/.pyenv"
 
   if [[ ! -d ${PYENV_ROOT} ]]; then
+    echo "==> Installing PYENV"
     git clone https://github.com/pyenv/pyenv.git              "${PYENV_ROOT}"
     git clone https://github.com/pyenv/pyenv-doctor.git       "${PYENV_ROOT}/plugins/pyenv-doctor"
     git clone https://github.com/pyenv/pyenv-installer.git    "${PYENV_ROOT}/plugins/pyenv-installer"
@@ -38,6 +39,7 @@ _zsh_pyenv_install() {
 
   if type pyenv >/dev/null; then
     for version in "${ZSH_PYENV_VERSION[@]}"; do
+      echo "==> Installing PYTHON ${version}"
       pyenv install ${version} --skip-existing
     done
     pyenv global $ZSH_PYENV_VERSION
