@@ -39,8 +39,7 @@ _zsh_pyenv_install() {
 
   if type pyenv >/dev/null; then
     for version in "${ZSH_PYENV_VERSION[@]}"; do
-      echo "==> Installing PYTHON ${version}"
-      pyenv install ${version} --skip-existing
+      pyenv install ${version} --skip-existing || echo "==> Install PYTHON ${version}"
     done
     pyenv global $ZSH_PYENV_VERSION
     rehash
