@@ -1,5 +1,5 @@
 # =============================================================================
-#   ZSH ANSIBLE PLUGIN
+#   ZSH PLUGIN
 # =============================================================================
 
 _zsh_pyenv_package() {
@@ -39,12 +39,10 @@ _zsh_pyenv_install() {
   if type pyenv >/dev/null; then
     for version in "${ZSH_PYENV_VERSION[@]}"; do
       pyenv install ${version} --skip-existing
-      echo
     done
     pyenv global $ZSH_PYENV_VERSION
+    rehash
   fi
-
-  rehash
 
 }
 
