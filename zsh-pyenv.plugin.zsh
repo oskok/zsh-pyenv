@@ -43,7 +43,7 @@ _zsh_pyenv_install() {
         pyenv install ${version} --skip-existing
       fi
     done
-    pyenv global 3.10 3.11 3.12 3.13
+    pyenv global system $ZSH_PYENV_VERSION
     rehash
   fi
 
